@@ -1,0 +1,46 @@
+server:
+  port: 7000
+
+spring:
+  application:
+    name: api-gateway
+
+  # 开始配置网关相关属性
+  cloud:
+    gateway:
+      routes:
+        # 配置商品服务器路由
+        - id: product_route
+          uri: http://127.0.0.1:8071 # 需要直接指定IP和端口不易维护且无法实现负载均衡
+          order: 1
+          # http://localhost:7000/shop-product/product/1
+          # 基于路由规则和过滤器，路径会发生如下变化
+          # https//127.0.0.1:8071/product/1
+          predicates:
+            - Path=/shop-product/**
+          filters:
+            - StripPrefix=1
+
+        # 配置用户服务器路由
+        - id: user_route
+          uri: http://127.0.0.1:8061 # 需要直接指定IP和端口不易维护且无法实现负载均衡
+          order: 1
+          # http://localhost:7000/shop-user/user/1
+          # 基于路由规则和过滤器，路径会发生如下变化
+          # https//127.0.0.1:8061/user/1
+          predicates:
+            - Path=/shop-user/**
+          filters:
+            - StripPrefix=1
+
+        # 配置订单服务器路由
+        - id: order_route
+          uri: http://127.0.0.1:8081 # 需要直接指定IP和端口不易维护且无法实现负载均衡
+          order: 1
+          # http://localhost:7000/shop-order/order/1
+          # 基于路由规则和过滤器，路径会发生如下变化
+          # https//127.0.0.1:8081/order/1
+          predicates:
+            - Path=/shop-order/**
+          filters:
+            - StripPrefix=1
