@@ -1,38 +1,18 @@
 # mall
 
-#### Description
+#### Introduction
 
-{**When you're done, you can delete the content in this README and update the file with details for others getting
-started with your repository**}
+**MALL project is a user back-end project in the mall system, with a total of five services.
+It includes orders, products, users, and three services. A public service, a public service contains a number of common
+entity classes and utility classes.
+There is also a gateway service**
 
-#### Software Architecture
+#### Software Architecture Diagram
 
-Software architecture description
+![ArchitectureDiagram.png](picture%2FArchitectureDiagram.png)
 
-#### Installation
+#### Installation Environment Tutorial
 
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Instructions
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Contribution
-
-1. Fork the repository
-2. Create Feat_xxx branch
-3. Commit your code
-4. Create Pull Request
-
-#### Gitee Feature
-
-1. You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2. Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3. Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4. The most valuable open source project [GVP](https://gitee.com/gvp)
-5. The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6. The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1. Create a database named mall and run the SQL file in the project
+2. Configure the middleware environment
+   https://blog.csdn.net/qq_46564922/article/details/148338500?spm=1001.2014.3001.5502
