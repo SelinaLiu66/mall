@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.selina.mall.product.mapper.ProductMapper">
+    <!--    <select id="selectBatchIds" resultType="Product">-->
+    <!--        SELECT-->
+    <!--        *-->
+    <!--        FROM pms_product-->
+    <!--        WHERE id IN-->
+    <!--        <foreach item="id" collection="ids"-->
+    <!--                 open="(" separator="," close=")">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--        ORDER BY FIELD(id,-->
+    <!--        <foreach item="id" collection="ids" separator=",">-->
+    <!--            #{id}-->
+    <!--        </foreach>-->
+    <!--        ) &lt;!&ndash; 保持返回顺序与输入ID顺序一致 &ndash;&gt;-->
+    <!--    </select>-->
+</mapper>

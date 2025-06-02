@@ -1,0 +1,68 @@
+# 设置用户服务端口为808*
+server:
+  port: 8181
+
+spring:
+  application:
+    name: mall-order
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848 # nacos配置中心地址
+        file-extension: yaml # 配置文件后缀
+        shared-configs: user-all-service.yaml # 所有模块共享的统一配置文件
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  #  cache:
+  #    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 1
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 确保开启
+####################################################################################################
+# Seata 配置
+seata:
+  enabled: true # 默认开启
+  application-id: ${spring.application.name}
+  tx-service-group: default_tx_group # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
+  registry:
+    type: nacos  # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace:
+      cluster: default
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  config:
+    type: nacos  # file、nacos 、apollo、zk、consul、etcd3
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace:
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      data-id: seata-file-conf.yaml
+  log:
+    exception-rate: 100
+####################################################################################################
+
+#支付宝相关的配置
+#alipay:
+#  app_id: 2021000148674115
+#  app_private_key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD0RnEn+0OLlyj8zH2NMnRVEj1SkNkPziQH87KBV/l2aU38mkj/MkA1erouUD78kYoPaWmiR8eCdD1avEm3/KTodAo1/Ntzqg5+Be0hgloPxxbK9tDRS+RsxYh1w2FH6SExMGQbe2nHwCM+FzLiFELUAEYZ+N0BPQqeqTrReVm9p9/KTNzIe0076w12srqY0L9yaKgcLk9ef1d/OwjoyomIGWC9Ld34na654n7j4kk/fzhlhxDa9E8oKxHWvmg2eUtWNCuCuvfmsysUnDDnvdhda1+/rwIGeg6ADWReF8IYrAFwetWlOOpzqnPevpVJo8sVkrSxRY5gfc9dB4ETgspLAgMBAAECggEAMf9xDcPqEVpBM20PjaT0Fq2DC7FGHGwPB+mjccH193yaT8eshT9d0RRroysdmUiYv4rN6j9S4Kq2HCpJ1HTLtCB8Loywxj3adYT1AlTR5kTTr3tRRmWIPZM42RHCiZt4Bb9n3hAmmJIFJKJO8eM/wnDD6HD9m1FJKSxuM43pBl49lY0XrpkwPTSwN/9VDbUWyQcthyFpFE2mSwQXqNeWnfEttPo6RUpzUesIUyOVcHYPgVn0TYwedpt4oxbxj+yiQMSZjhCGXo8F3xippxe20FAA86MQKiZ4HlBZnBn1WxGX9Ih3uj/roFWeHU0zfikVlljvYUNciGtoiG6EV2NcoQKBgQD/fcu81zUf55128ZORGVuCpq1jG4qUy2m1KmqDFDC4R3y6HwqRvCzQbN7RTprofufPajsHZKBRFZzEwW2HrwkG+aXHSA2+sezbVFz/mnybnT+cQHgodmSb7LD/bEzwESPZcFrpy0bUTQTNoNQqm/A144qaUB2yDZBnpS0qCRPFIwKBgQD0wu4ctDmkQbJxECRfB31lcZOtdyL7AmjoW95TvBxT6gKbbmO91iJOA8Lcwb9e187LRznCtM2FybE9f+RZlbXFALSEKf7IUct0xc8wshwP+lM00+lBgyHis5ERsGq4ltawTMKXyhLz1QSROzf/0TnUCFdPIBn4kr9HWpX25QicuQKBgQC3i74Uel81/oVHcCHdeeQeJnQl4SFb6A6XElPWu2iM2v6mD6reK9veGHiy0c/D+3e5sM2bcBUka2xmhbeUZJENq8gHNKJ7PwO0RhVRo8ClYwDR1hb8qqF4y0AVH87eINIqYedOUrUdy/8JYuNJgSG+9Ssb1TagNdJqQ2YA7uh/FQKBgAykWNogsO17+zR9yfMiluZ7dE48XhEq8bI2tIgMqkXnS1Ut4Xb3rXPsG899Ll4+tU6okiItZoQng8ESbv/1jJrtS2WcKa29E84nPWldebeVjWCoJV8d380uyypnu0tndxVKEa73X/06Hm9F6MGM0/jQqXnLxauiIMEVu7Mx5zz5AoGBAMfe8UOd3ckObetbSDLi29H/Npnh9G2JEBsWpa+J4eCpddrz7jz5QsVkbjPaz2eVnQ1klbZu+SRwc6ms+QnOqe2/MlbhBBt4XWEEXSZzNL2F2v9jjBR9mh0yAt3IP32tNBAlPEV24x19doa0CdVnxRxRVlpq30gBGgy6SKASkrzg
+#  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpG+oOS7UhEauERjEa2rYrRCFv/enFQOfB7xZ9EvVzQsoDGqcXaxQtN96G56hwFKLetVt/wpV73TZCHcDXuDLaJGEUnEgtiRC7XnrUB6lzNpIORn+/sMNq4C2qmjfzjJuaPbD1qxz6f5xI75dBfcvdSwA3NB1dHPCorcAyA9DYuV7/us9qCeEGwRSO9Go1uMDBIkYNLUT8PYYgP5K1oki1pWJr8sqi8RxVNjIqiotNsftTR11x2Zb8d8gL5rdfvZ6s0Eooqt+jkrSzK0KIZ4CUWnFPkGBXPpdo+1f94xx8F4nTt9vbkcKQ0E7Er2jXuYzR8KOURBpBCJMOTLK4wOiQIDAQAB
+#  notify_url: http://zd82a3f5.natappfree.cc/mall-order/order/notify
+#  sign_type: RSA2
+#  charset: utf-8
+#  gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+#  return-url: http://localhost:5137/paycallback
