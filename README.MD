@@ -15,7 +15,7 @@
 + 容错防护：Sentinel 熔断限流（QPS控制/降级规则）  
 + 服务通信：OpenFeign + Ribbon 负载均衡  
 + 安全认证：JWT + OAuth2 鉴权方案（扩展点）  
-
+```
 
 ### 3. 软件架构图
 
